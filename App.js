@@ -1,20 +1,43 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import "react-native-gesture-handler";
+import React from "react";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import { NavigationContainer } from "@react-navigation/native";
+import Home from "./Home";
+import { FontAwesome } from "@expo/vector-icons";
 
-export default function App() {
+const Drawer = createDrawerNavigator();
+
+function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Drawer.Navigator
+        initialRouteName="Home"
+        screenOptions={{
+          headerCenter: () => (
+            <FontAwesome name={"home"} size={24} color="black" />
+          ),
+          drawerIcon: ({ focused, size }) => (
+            <FontAwesome
+              name={focused ? "home" : "bars"}
+              size={size}
+              color="black"
+            />
+          ),
+        }}
+      >
+        <Drawer.Screen name="Home" component={Home} />
+      </Drawer.Navigator>
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
+// function App() {
+//   return (
+//     <View>
+//       <Text>Hello</Text>
+//     </View>
+//   );
+// }
+
+// export default App;
